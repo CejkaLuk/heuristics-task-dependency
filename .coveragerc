@@ -1,0 +1,9 @@
+# Configuration file for [Coverage.py](https://coverage.readthedocs.io/en/stable/index.html)
+[run]
+branch = True
+
+[report]
+skip_empty = True
+
+[html]
+directory = coverage_html_report
