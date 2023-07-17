@@ -1,18 +1,29 @@
 TESTS_DIR := tests
+# Declare the TESTS_DIR directory as a phony -> `make` will ignore it (and run the
+# 'tests' rule if TESTS_DIR == tests.
+.PHONY: $(TESTS_DIR)
+COVERAGE_DIR_TO_TEST := heuristics
+COVERAGE_CONFIG_FILE := .coveragerc
 COVERAGE_REPORT_TYPE := html
-NOSE2_ARGS := --pretty-assert
+COVERAGE_OUTPUT_DIR := coverage_html_report
+NOSE2_ARGS := --start-dir $(TESTS_DIR)
 
 init:
 	pip3 install -r requirements.txt
 
-test:
-	nose2 --start-dir $(TESTS_DIR) $(NOSE2_ARGS)
+tests:
+	nose2 $(NOSE2_ARGS)
 
-test_coverage:
-	nose2 --start-dir $(TESTS_DIR) --with-coverage
+tests_coverage:
+	nose2 $(NOSE2_ARGS) \
+		--with-coverage
 
-test_coverage_report:
-	nose2 --start-dir $(TESTS_DIR) --with-coverage --coverage-report $(COVERAGE_REPORT_TYPE)
+tests_coverage_report:
+	nose2 $(NOSE2_ARGS) \
+		--with-coverage \
+		--coverage-config $(COVERAGE_CONFIG_FILE) \
+		--coverage-report $(COVERAGE_REPORT_TYPE) \
+		--coverage $(COVERAGE_DIR_TO_TEST)
 
 clean:
-	rm -rf .coverage htmlcov
+	rm -rf .coverage $(COVERAGE_OUTPUT_DIR)
