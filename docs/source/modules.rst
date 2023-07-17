@@ -1,7 +1,7 @@
-examples
+heuristics
 ==========
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
-   examples
+   heuristics

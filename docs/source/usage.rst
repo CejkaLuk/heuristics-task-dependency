@@ -1,17 +1,17 @@
 Usage
-==========================================================================
+=====
 
-Core dependencies
+Core Dependencies
 -----------------
 
-The core dependecies for EP are:
+The core dependencies for the HMADP project are:
 
 * `Python <https://www.python.org/>`_ - version 3.9.6 or newer
 
-Python package dependencies
+Python Package Dependencies
 ---------------------------
 
-The dependencies for EP are the following Python packages:
+The dependencies for HMADP are the following Python packages:
 
 * `nose2 <https://docs.nose2.io/en/latest/>`_ - for unit tests
 * `nose2-cov <https://pypi.org/project/nose2-cov/>`_ - for test coverage (with reports etc.)
@@ -24,8 +24,8 @@ They can be installed using the :code:`init` task predefined in :code:`Makefile`
    $ make init
 
 
-Run unit tests
---------------
+Unit Tests
+----------
 
 Unit tests are written using the `nose2 <https://docs.nose2.io/en/latest/>`_ testing framework.
 They can be run using the following tasks predefined in :code:`Makefile`:
@@ -33,13 +33,13 @@ They can be run using the following tasks predefined in :code:`Makefile`:
 .. code-block:: bash
 
    # Run tests only
-   $ make test
+   $ make tests
 
    # Run tests with coverage
-   $ make test_coverage
+   $ make tests_coverage
 
    # Run tests with coverage and output the results into a html report
-   $ make test_coverage_report
+   $ make tests_coverage_report
 
 To remove the generated coverage report run:
 
@@ -48,7 +48,7 @@ To remove the generated coverage report run:
    $ make clean
 
 
-Build documentation
+Build Documentation
 ___________________
 
 Documentation is generated using `sphinx <https://www.sphinx-doc.org/en/master/>`_.

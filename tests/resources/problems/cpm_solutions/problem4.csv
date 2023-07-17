@@ -1,0 +1,9 @@
+activity_id duration resources earliest_start earliest_end latest_start latest_end time_reserve
+1-2 4 3 0 4 0 4 0
+1-3 3 4 0 3 2 5 2
+1-4 5 3 0 5 2 7 2
+2-5 3 2 4 7 4 7 0
+3-5 2 3 3 5 5 7 2
+4-6 4 2 5 9 7 11 2
+5-6 3 4 7 10 8 11 1
+5-7 4 3 7 11 7 11 0
