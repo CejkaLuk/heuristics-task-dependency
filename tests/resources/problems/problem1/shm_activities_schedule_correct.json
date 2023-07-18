@@ -43,7 +43,7 @@
        "resource": 3
      }
    ],
-   "title": "Serial heuristic method - Gantt diagram",
+   "title": "Serial Heuristic Method (SHM) - Gantt diagram",
    "xlabel": "Time",
    "ylabel": "Activity"
  }

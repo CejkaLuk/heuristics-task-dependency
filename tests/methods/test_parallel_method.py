@@ -7,7 +7,7 @@ from heuristics.core.activities.activity import Activity
 from heuristics.core.activities.activity_id import ActivityID as ID
 from heuristics.methods.parallel_method import ParallelMethod
 from tests.core.test_cpm import CPMTestSuite
-from tests.methods.test_serial_method import SerialMethodTestSuite
+from tests.methods.test_shm import SHMTestSuite
 from tests.resources.problems.problems import ProblemsPaths
 
 
@@ -69,12 +69,12 @@ class ParallelMethodTestSuite(unittest.TestCase):
         correct_serial_acts_schedule_file = f"{problem_dir}/"+ \
                                             "parallel_method_activities_schedule_correct.json"
 
-        cpm_acts_schedule = SerialMethodTestSuite.get_json_from_file(cpm_json_file)
-        parallel_method_acts_schedule = SerialMethodTestSuite.get_json_from_file(parallel_json_file)
+        cpm_acts_schedule = SHMTestSuite.get_json_from_file(cpm_json_file)
+        parallel_method_acts_schedule = SHMTestSuite.get_json_from_file(parallel_json_file)
 
-        correct_cpm_acts_schedule = SerialMethodTestSuite.get_json_from_file(
+        correct_cpm_acts_schedule = SHMTestSuite.get_json_from_file(
             correct_cpm_acts_schedule_file)
-        correct_parallel_method_acts_schedule = SerialMethodTestSuite.get_json_from_file(
+        correct_parallel_method_acts_schedule = SHMTestSuite.get_json_from_file(
             correct_serial_acts_schedule_file)
 
         self.assertDictEqual(cpm_acts_schedule, correct_cpm_acts_schedule)
@@ -96,7 +96,7 @@ class ParallelMethodTestSuite(unittest.TestCase):
             next(lines) # Skip CSV headers
             for line in lines:
                 id = ID.from_str(str(line[0]))
-                act = SerialMethodTestSuite.get_act_by_id(id, activities)
+                act = SHMTestSuite.get_act_by_id(id, activities)
                 act.actual_start = int(line[1])
                 act.actual_end = int(line[2])
                 act.priority = int(line[3])
