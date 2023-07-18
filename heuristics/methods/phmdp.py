@@ -13,7 +13,7 @@ class ParallelHeuristicMethodDynamicPriorities(PHM):
                                          method_name: str = _method_name,
                                          act_timeframe_type: str = "phmdp",
                                          json_file_path: str = \
-                                            "pmdp_activities_schedule.json") -> str:
+                                            "phmdp_activities_schedule.json") -> str:
         """Save the activities schedule produced by PHMDP to a JSON file."""
 
         return super()._activities_schedule_to_json_file(method_name,
