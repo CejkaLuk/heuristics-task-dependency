@@ -1,7 +1,7 @@
 import unittest
 from io import StringIO
 from contextlib import redirect_stdout
-from csv import reader as csv_reader  # For CSV file operations
+from csv import reader as csv_reader
 from nose2.tools import params
 from heuristics.core.activities.activity import Activity
 from heuristics.core.cpm import CriticalPathMethod as CPM
