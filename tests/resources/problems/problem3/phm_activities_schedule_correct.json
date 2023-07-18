@@ -73,7 +73,7 @@
       "resource": 4
     }
   ],
-  "title": "Parallel heuristic method - Gantt diagram",
+  "title": "Parallel Heuristic Method (PHM) - Gantt diagram",
   "xlabel": "Time",
   "ylabel": "Activity"
 }

@@ -2,8 +2,10 @@ from typing import List
 from heuristics.core.activities.activity import Activity
 from heuristics.methods.method import HeuristicMethod
 
-class ParallelMethod(HeuristicMethod):
-    """Parallel Heuristic Method for activity-based project planning."""
+class ParallelHeuristicMethod(HeuristicMethod):
+    """Parallel Heuristic Method (PHM) for activity-based project planning."""
+
+    __method_name: str = "Parallel Heuristic Method (PHM)"
 
     ## Public methods
     def solve(self):
@@ -33,11 +35,11 @@ class ParallelMethod(HeuristicMethod):
         self.cpm.project.actual_end = self._get_project_actual_end()
 
     def activities_schedule_to_json_file(self,
-                                         method_name: str = "Parallel heuristic method",
-                                         act_timeframe_type: str = "parallel_method",
+                                         method_name: str = __method_name,
+                                         act_timeframe_type: str = "phm",
                                          json_file_path: str = \
-                                            "parallel_method_activities_schedule.json") -> str:
-        """Save the activities schedule produced by the parallel heuristic method to a JSON file."""
+                                            "phm_activities_schedule.json") -> str:
+        """Save the activities schedule produced by PHM to a JSON file."""
 
         return super()._activities_schedule_to_json_file(method_name,
                                                          act_timeframe_type,
@@ -48,8 +50,7 @@ class ParallelMethod(HeuristicMethod):
         """
         Initializes the priority of each activity.
 
-        In the context of the Parallel Heuristic Method, the priority of an activity is
-        equal to its time reserve.
+        In the context of the PHM, the priority of an activity is equal to its time reserve.
         """
 
         for act in self.cpm.project.activities:
@@ -57,12 +58,10 @@ class ParallelMethod(HeuristicMethod):
 
     def _update_priorities(self, time: int):
         """
-        Does nothing for ParallelMethod as it doesn't support dynamic priorities.
+        Does nothing for PHM as it doesn't support dynamic priorities.
 
-        It servers as a placeholder for the implementation of ParallelMethodDynamicPriorities
-        (PHMDP).
-
-        PHMDP overrides this method with its dynamic updating of priorities.
+        It servers as a placeholder for the implementation of PHMDP, which overrides
+        this method with its dynamic updating of priorities.
         """
 
     def _unfinished_activities_exist(self, time: int) -> bool:
@@ -107,6 +106,7 @@ class ParallelMethod(HeuristicMethod):
 
     def _predecessors_finished(self, act:Activity, time: int):
         """Returns True if all predecessors of the given activity have finished."""
+
         return all(pred.is_finished(time) for pred in act.predecessors)
 
     @staticmethod

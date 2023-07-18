@@ -1,6 +1,6 @@
-from heuristics.methods.parallel_method import ParallelMethod
+from heuristics.methods.phm import ParallelHeuristicMethod as PHM
 
-class ParallelMethodDynamicPriorities(ParallelMethod):
+class ParallelHeuristicMethodDynamicPriorities(PHM):
     """
     Parallel Heuristic Method with Dynamic Priorities (PHMDP) for activity-based
     project planning.
@@ -22,9 +22,12 @@ class ParallelMethodDynamicPriorities(ParallelMethod):
 
     ## Private methods
     def _init_activity_priorities(self):
-        """Override the method in ParallelMethod to avoid initializing activities without time."""
+        """
+        Override the method in PHM to avoid initializing activities without
+        time.
+        """
 
     def _update_priorities(self, time: int):
-        """Override the method in ParallelMethod to update the priorities dynamically."""
+        """Override the method in PHM to update the priorities dynamically."""
         for act in self.cpm.project.activities:
             act.priority = act.latest_start - time

@@ -20,10 +20,10 @@ heuristics.methods.shm module
    :undoc-members:
    :show-inheritance:
 
-heuristics.methods.parallel_method module
+heuristics.methods.phm module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: heuristics.methods.parallel_method
+.. automodule:: heuristics.methods.phm
    :members:
    :undoc-members:
    :show-inheritance:
