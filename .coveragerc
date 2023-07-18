@@ -1,6 +1,7 @@
 # Configuration file for [Coverage.py](https://coverage.readthedocs.io/en/stable/index.html)
 [run]
 branch = True
+omit = */visualization/*
 
 [report]
 skip_empty = True
