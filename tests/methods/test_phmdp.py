@@ -2,7 +2,7 @@ import unittest
 from os import remove
 from nose2.tools import params
 from heuristics.methods.phmdp import ParallelMethodDynamicPriorities as PHMDP
-from tests.methods.test_serial_method import SerialMethodTestSuite
+from tests.methods.test_shm import SHMTestSuite
 from tests.methods.test_parallel_method import ParallelMethodTestSuite
 from tests.resources.problems.problems import ProblemsPaths
 
@@ -66,12 +66,12 @@ class ParallelMethodDynamicPrioritiesTestSuite(unittest.TestCase):
         correct_serial_acts_schedule_file = f"{problem_dir}/"+ \
                                             "phmdp_activities_schedule_correct.json"
 
-        cpm_acts_schedule = SerialMethodTestSuite.get_json_from_file(cpm_json_file)
-        pmdp_acts_schedule = SerialMethodTestSuite.get_json_from_file(pmdp_json_file)
+        cpm_acts_schedule = SHMTestSuite.get_json_from_file(cpm_json_file)
+        pmdp_acts_schedule = SHMTestSuite.get_json_from_file(pmdp_json_file)
 
-        correct_cpm_acts_schedule = SerialMethodTestSuite.get_json_from_file(
+        correct_cpm_acts_schedule = SHMTestSuite.get_json_from_file(
             correct_cpm_acts_schedule_file)
-        correct_pmdp_acts_schedule = SerialMethodTestSuite.get_json_from_file(
+        correct_pmdp_acts_schedule = SHMTestSuite.get_json_from_file(
             correct_serial_acts_schedule_file)
 
         self.assertDictEqual(cpm_acts_schedule, correct_cpm_acts_schedule)

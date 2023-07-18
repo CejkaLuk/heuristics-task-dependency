@@ -129,14 +129,14 @@ class Activity:
                     'end': self.earliest_end,
                     'resource': self.resources}
 
-        if heuristic_method in ["serial_method", "parallel_method", "phmdp"]:
+        if heuristic_method in ["shm", "parallel_method", "phmdp"]:
             return {'label': str(self.id),
                     'start': self.actual_start,
                     'end': self.actual_end,
                     'resource': self.resources}
 
         raise ValueError(f"Cannot get time frame of heuristic method '{heuristic_method}!'" +
-                         "\n Currently, only 'cpm, serial_method, parallel_method, phmdp'" +
+                         "\n Currently, only 'cpm, shm, parallel_method, phmdp'" +
                          " are supported.")
 
     def is_scheduled(self) -> bool:

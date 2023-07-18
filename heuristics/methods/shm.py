@@ -2,8 +2,10 @@ from heuristics.core.activities.activity import Activity
 from heuristics.methods.method import HeuristicMethod
 
 
-class SerialMethod(HeuristicMethod):
-    """Serial heuristic method for activity-based project planning."""
+class SerialHeuristicMethod(HeuristicMethod):
+    """Serial Heuristic Method (SHM) for activity-based project planning."""
+
+    __method_name: str = "Serial Heuristic Method (SHM)"
 
     ## Public methods
     def solve(self):
@@ -18,11 +20,11 @@ class SerialMethod(HeuristicMethod):
         self.cpm.project.actual_end = self._get_project_actual_end()
 
     def activities_schedule_to_json_file(self,
-                                         method_name: str = "Serial heuristic method",
-                                         act_timeframe_type: str = "serial_method",
+                                         method_name: str = __method_name,
+                                         act_timeframe_type: str = "shm",
                                          json_file_path: str = \
-                                            "serial_method_activities_schedule.json") -> str:
-        """Save the activities schedule produced by the serial heuristic method to a JSON file."""
+                                            "shm_activities_schedule.json") -> str:
+        """Save the activities schedule produced by the Serial Heuristic Method to a JSON file."""
 
         return super()._activities_schedule_to_json_file(method_name,
                                                          act_timeframe_type,
