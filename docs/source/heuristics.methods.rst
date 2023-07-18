@@ -27,3 +27,11 @@ heuristics.methods.parallel_method module
    :members:
    :undoc-members:
    :show-inheritance:
+
+heuristics.methods.phmdp module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: heuristics.methods.phmdp
+   :members:
+   :undoc-members:
+   :show-inheritance:
