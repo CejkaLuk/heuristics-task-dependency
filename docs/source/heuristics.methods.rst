@@ -12,10 +12,10 @@ heuristics.methods.method module
    :undoc-members:
    :show-inheritance:
 
-heuristics.methods.serial_method module
+heuristics.methods.shm module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: heuristics.methods.serial_method
+.. automodule:: heuristics.methods.shm
    :members:
    :undoc-members:
    :show-inheritance:
