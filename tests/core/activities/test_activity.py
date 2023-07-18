@@ -63,7 +63,7 @@ class ActivityTest(unittest.TestCase):
                               'earliest_start': earliest_start, 'earliest_end': earliest_end,
                               'latest_start': latest_start, 'latest_end': latest_end,
                               'time_reserve': time_reserve, 'actual_start': None,
-                              'actual_end': None })
+                              'actual_end': None, 'priority': None })
 
     @params((Activity("2-3", 0, 0), activities, [ID.from_str("1-2")]),
             (Activity("3-5", 0, 0), activities, [ID.from_str("1-3"), ID.from_str("2-3")]),
@@ -139,7 +139,7 @@ class ActivityTest(unittest.TestCase):
 
         # If this fails, then edit this test to validate the comparison of the equality
         # of Activity instances using all variables
-        self.assertEqual(len(vars(act_left).items()), 13)
+        self.assertEqual(len(vars(act_left).items()), 14)
 
         self.assertEqual(act_left == act_right, acts_equal,
                          msg="Comparison of equality failed!" +
@@ -168,3 +168,15 @@ class ActivityTest(unittest.TestCase):
                                " type 'Activity' and type 'ID' should have failed as the" +
                                " equality comparison is implemented only between the same types!"):
             act == act_id
+
+    def test_get_time_frame_with_unsupported_type_should_fail(self):
+        """
+        Tests that getting the time frame of an activity fails for an unsupported heuristic
+        method.
+        """
+
+        act = Activity("1-2", 4, 3)
+
+        with self.assertRaises(ValueError, msg="Getting the time frame for the 'fake_method'" +
+                               " heuristic method should have failed as it is not supported."):
+            act.get_time_frame("fake_method")

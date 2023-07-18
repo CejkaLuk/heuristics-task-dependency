@@ -44,6 +44,9 @@ class Activity:
     actual_end: int
     """The time that the activity is actually scheduled to end by a heuristic method."""
 
+    priority: int
+    """The priority of the activity according to a heuristic method."""
+
     ## Public methods
     def __init__(self, id, duration: int, resources: int,
                  predecessors: List['Activity'] = None, successors: List['Activity'] = None,
@@ -69,6 +72,7 @@ class Activity:
 
         self.actual_start = None
         self.actual_end = None
+        self.priority = None
 
     def as_dict(self) -> Dict:
         """
@@ -110,26 +114,29 @@ class Activity:
 
         self.successors = successors
 
-    def get_timeframe(self, type: str) -> Dict:
+    def get_time_frame(self, heuristic_method: str) -> Dict:
         """
-        Returns the timeframe of the activity, along with its id (label) and resources
-        depending on the type.
+        Returns the time frame of the activity, along with its id (label) and resources
+        depending on the type of the heuristic method used.
+
+        The time frame of an activity is the interval when the activity is scheduled by a
+        heuristic method.
         """
 
-        if type == "cpm":
+        if heuristic_method == "cpm":
             return {'label': str(self.id),
                     'start': self.earliest_start,
                     'end': self.earliest_end,
                     'resource': self.resources}
 
-        if type == "serial_method":
+        if heuristic_method in ["serial_method", "parallel_method"]:
             return {'label': str(self.id),
                     'start': self.actual_start,
                     'end': self.actual_end,
                     'resource': self.resources}
 
-        raise ValueError(f"Cannot get timeframe of type '{type}!'" +
-                         "\n Currently, only 'cpm, serial_method' are supported.")
+        raise ValueError(f"Cannot get time frame of heuristic method '{heuristic_method}!'" +
+                         "\n Currently, only 'cpm, serial_method, parallel_method' are supported.")
 
     def is_scheduled(self) -> bool:
         """Returns True if the activity is scheduled."""
@@ -137,7 +144,7 @@ class Activity:
 
     def is_finished(self, time: int):
         """Returns True if the activity is finished."""
-        return self.actual_end <= time
+        return self.actual_end is not None and self.actual_end <= time
 
     ## Private methods
     @staticmethod
