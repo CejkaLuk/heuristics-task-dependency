@@ -17,6 +17,8 @@ class ParallelMethod(HeuristicMethod):
 
         time = 0
         while self._unfinished_activities_exist(time):
+            self._update_priorities(time)
+
             viable_activities = self._get_viable_activities(time)
 
             if len(viable_activities) > 0:
@@ -52,6 +54,16 @@ class ParallelMethod(HeuristicMethod):
 
         for act in self.cpm.project.activities:
             act.priority = act.time_reserve
+
+    def _update_priorities(self, time: int):
+        """
+        Does nothing for ParallelMethod as it doesn't support dynamic priorities.
+
+        It servers as a placeholder for the implementation of ParallelMethodDynamicPriorities
+        (PHMDP).
+
+        PHMDP overrides this method with its dynamic updating of priorities.
+        """
 
     def _unfinished_activities_exist(self, time: int) -> bool:
         """Returns True if there are unfinished activities at a given time."""
@@ -122,5 +134,6 @@ class ParallelMethod(HeuristicMethod):
     def _get_time_next_act_finish(self, time: int) -> int:
         """Returns the time when the next activity finishes."""
 
-        return min(act.actual_end for act in self.cpm.project.activities \
-                   if act.is_scheduled() and not act.is_finished(time))
+        return min((act.actual_end for act in self.cpm.project.activities \
+                   if act.is_scheduled() and not act.is_finished(time)),
+                   default=self.cpm.project.start)
