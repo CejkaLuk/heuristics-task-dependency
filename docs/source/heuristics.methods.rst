@@ -19,3 +19,11 @@ heuristics.methods.serial_method module
    :members:
    :undoc-members:
    :show-inheritance:
+
+heuristics.methods.parallel_method module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: heuristics.methods.parallel_method
+   :members:
+   :undoc-members:
+   :show-inheritance:
