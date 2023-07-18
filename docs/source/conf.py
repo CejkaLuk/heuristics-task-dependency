@@ -10,25 +10,31 @@ sys.path.insert(0, os.path.abspath('../..'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'HMADP'
-copyright = '2022, Lukáš Matthew Čejka'
+copyright = '2023, Lukáš Matthew Čejka'
 author = 'Lukáš Matthew Čejka'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-# TODO: Following the Sphnix documentation from here: https://www.sphinx-doc.org/en/master/tutorial/narrative-documentation.html
-#        make the docs for the project be generated almost automatically.
 extensions = ['sphinx.ext.autodoc']
 
 templates_path = ['_templates']
-exclude_patterns = []
-
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-# TODO: Browse for a nicer theme
-html_theme = 'bizstyle'
+html_theme = "nature"
+html_style = "nature_override.css"
+
 html_static_path = ['_static']
+
+# Custom sidebar templates, maps document names to template names.
+html_sidebars = {
+    "**": [
+        "site_custom_sidebars.html",
+        "localtoc.html",
+        "searchbox.html",
+        "relations.html",
+    ]
+}
