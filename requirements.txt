@@ -1,3 +1,5 @@
+matplotlib
 nose2
 nose2-cov
+numpy
 sphinx
