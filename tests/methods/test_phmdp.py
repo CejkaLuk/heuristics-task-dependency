@@ -1,9 +1,9 @@
 import unittest
 from os import remove
 from nose2.tools import params
-from heuristics.methods.phmdp import ParallelMethodDynamicPriorities as PHMDP
+from heuristics.methods.phmdp import ParallelHeuristicMethodDynamicPriorities as PHMDP
 from tests.methods.test_shm import SHMTestSuite
-from tests.methods.test_parallel_method import ParallelMethodTestSuite
+from tests.methods.test_phm import PHMTestSuite
 from tests.resources.problems.problems import ProblemsPaths
 
 
@@ -27,7 +27,7 @@ class ParallelMethodDynamicPrioritiesTestSuite(unittest.TestCase):
         phmdp.solve()
 
         # Verify that activities have correct values
-        correct_activities = ParallelMethodTestSuite.get_correct_activities(
+        correct_activities = PHMTestSuite.get_correct_activities(
             cpm_correct_acts_file, pmdp_correct_acts_file)
         self.assertListEqual(phmdp.cpm.project.activities, correct_activities)
 
@@ -51,7 +51,7 @@ class ParallelMethodDynamicPrioritiesTestSuite(unittest.TestCase):
         cpm_acts_file = f"{problem_dir}/cpm_solution.csv"
         pmdp_acts_file = f"{problem_dir}/phmdp_solution.csv"
 
-        activities = ParallelMethodTestSuite.get_correct_activities(
+        activities = PHMTestSuite.get_correct_activities(
             cpm_acts_file, pmdp_acts_file)
 
         phmdp = PHMDP(problem_file, r_max)
