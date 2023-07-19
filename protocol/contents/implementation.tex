@@ -1,1 +1,88 @@
+\setcounter{footnote}{3} % Workaround for using footnotemark in theory.tex
 \section{Implementation}
+In this section, the implementation of the project comprising the methods introduced in Section~\ref{Section:theory} is presented.
+The source code is available on request or in the project's GitHub repository\footnote{Heuristic Methods for Activity Dependency Problems GitHub repository URL: \url{https://github.com/CejkaLuk/heuristics-task-dependency}}.
+The project was implemented in Python (version 3.9.6\footnote{Python 3.9.6 available at: \url{https://www.python.org/downloads/release/python-396}}) as it offers clean data structures and support for visualization tools.
+
+The project uses the following \textit{make}\footnote{GNU Make webpage URL: \url{https://www.gnu.org/software/make}} tasks:
+
+\begin{tight_itemize}
+	\item \code{make init} - Download and install the required Python packages.
+	\item \code{make tests}, \code{make tests\_coverage}, and \code{make tests\_coverage\_report} - Run the unit tests using \textit{nose2}\footnote{Nose2 testing framework webpage URL: \url{https://docs.nose2.io/en/latest}} alone, with coverage, and with coverage generated into an HTML report, respectively.
+	\item \code{make docs} (executed in \code{docs/}) - Generate the project documentation using \textit{Sphinx}\footnote{Sphinx documentation generator webpage URL: \url{https://www.sphinx-doc.org/en/master}}.
+	\item \code{make clean} (executed in the repository root or in \code{docs/}) - Clean the generated files.
+\end{tight_itemize}
+
+The core functions of SHM, PHM, and PHMDP are presented in Listings~\ref{Listing:implementation->shm->solve-function}, \ref{Listing:implementation->phm->solve-function}, and \ref{Listing:implementation->phmdp->solve-function}, respectively.
+
+\begin{lstlisting}[caption={The core functions of SHM: \code{solve()} and \code{\_schedule\_activity()}. Note that unimportant functions have been omitted for brevity.},label={Listing:implementation->shm->solve-function}]
+def solve(self):
+"""Solves the activity dependency problem with resources."""
+	
+	self.cpm.solve()
+	
+	# Schedule activities
+	for act in self.cpm.project.activities:
+		self._schedule_activity(act)
+	
+	self.cpm.project.actual_end = self._get_project_actual_end()
+	
+def _schedule_activity(self, act: Activity):
+	"""Schedules an activity as soon as possible considering dependencies and available resources."""
+
+	# Get the time when all precessors of act have been completed
+	time = self._get_predecessors_finished_time(act)
+	
+	while not act.is_scheduled():
+		tentative_act_end = time + act.duration
+		
+		# Get the time when the available resources are exceeded between 'time' and 'tentative_act_end'
+		time_resources_exceed = self._get_time_available_resources_exceeded(act, time, tentative_act_end)
+		
+		# If the resources are not exceeded in the time frame, then schedule the activity from 'time'
+		if time_resources_exceed is None:
+			self._schedule_activity_from(act, time)
+		# Otherwise proceed to the next time when the resources are not exceeded
+		else:
+			time = time_resources_exceed + 1
+\end{lstlisting}
+
+\begin{lstlisting}[caption={The core function of PHM: \code{solve()}.},label={Listing:implementation->phm->solve-function}]
+def solve(self):
+	"""Solves the activity dependency problem with resources and time reserves as priorities."""
+	
+	self.cpm.solve()
+	
+	self._init_activity_priorities()
+	
+	time = 0
+	while self._unfinished_activities_exist(time):
+		# For PHM, this function does nothing, it serves as a placeholder so that PHMDP can reuse the 'solve' function
+		self._update_priorities(time)
+		
+		# Get activities that can be schedule from 'time'
+		viable_activities = self._get_viable_activities(time)
+		
+		if len(viable_activities) > 0:
+			self._sort_by_priority_and_id(viable_activities)
+			
+			# Try to schedule all viable activities if they don't exceed the available resources
+			for act in viable_activities:
+				if not self._resources_exceeded(act, time, time + act.duration):
+					self._schedule_activity_from(act, time)
+		
+		# Jump to the next time when an activity finishes as that is when more activities can be scheduled
+		time = self._get_time_next_act_finish(time)
+	
+	self.cpm.project.actual_end = self._get_project_actual_end()
+\end{lstlisting}
+
+\begin{lstlisting}[caption={The core functions of PHMDP. The PHMDP class inherits from PHM, therefore, it only overrides functions that deal with priorities.},label={Listing:implementation->phmdp->solve-function}]
+def _init_activity_priorities(self):
+	"""Override the method in PHM to avoid initializing activities without time."""
+
+def _update_priorities(self, time: int):
+	"""Override the method in PHM to update the priorities dynamically."""
+	for act in self.cpm.project.activities:
+		act.priority = act.latest_start - time
+\end{lstlisting}
