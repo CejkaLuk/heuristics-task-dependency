@@ -63,7 +63,7 @@ class HeuristicMethod():
                                             "cpm_activities_schedule.json") -> str:
         """Save the activities schedule produced by the heuristic method to a JSON file."""
 
-        data = {'packages': [], "title" : f"{method_name} - Gantt diagram", "xlabel" : "Time",
+        data = {'packages': [], "title" : f"{method_name} - Gantt chart", "xlabel" : "Time",
                 "ylabel" : "Activity"}
         for activity in self.cpm.project.activities:
             data['packages'].append(activity.get_time_frame(act_timeframe_type))
