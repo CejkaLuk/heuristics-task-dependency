@@ -3,7 +3,20 @@ from heuristics.core.activities.activity import Activity
 from heuristics.methods.method import HeuristicMethod
 
 class ParallelHeuristicMethod(HeuristicMethod):
-    """Parallel Heuristic Method (PHM) for activity-based project planning."""
+    """
+    Parallel Heuristic Method (PHM) for activity-based project planning.
+
+    In every time unit, the method generates a list of activities whose predecessors have
+    been completed.
+    Then, it arranges the activities according to their Time Reserves (TR) determined
+    by CPM.
+    Note that the TR of an activity is used as its priority value.
+    Therefore, the lower the priority value, the higher the priority of the activity.
+    If two activities have the same TR value (priority), then they are sorted in ascending order
+    according to their IDs
+    Starting with the lowest TR value, the method schedules as many activities in the time
+    unit as possible before moving to the next time unit.
+    """
 
     __method_name: str = "Parallel Heuristic Method (PHM)"
 

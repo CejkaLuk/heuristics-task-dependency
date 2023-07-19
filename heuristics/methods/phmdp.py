@@ -4,6 +4,16 @@ class ParallelHeuristicMethodDynamicPriorities(PHM):
     """
     Parallel Heuristic Method with Dynamic Priorities (PHMDP) for activity-based
     project planning.
+
+    In every time unit, the method generates a list of activities whose predecessors have
+    been completed.
+    Then, it updates their priority values as: Latest Start (LS) - time
+    Next, it arranges the activities according to their priority values.
+    Note that the lower the priority value, the higher the priority of the activity.
+    If two activities have the same priority value, then they are sorted in ascending order
+    according to their IDs.
+    Starting with the lowest priority value, the method schedules as many activities in the time
+    unit as possible before moving to the next time unit.
     """
 
     _method_name: str = "Parallel Heuristic Method with Dynamic Priorities (PHMDP)"
