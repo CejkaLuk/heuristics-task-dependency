@@ -25,7 +25,8 @@
 \usepackage{tikz}					% Visual representation of matrices, graphs etc.
 \usetikzlibrary{
 	external,							% Externalize tikz pictures to avoid recompiling them with every compilation
-	positioning
+	positioning,
+	arrows.meta
 }
 \tikzexternalize[					% Add '-shell-escape' to the pdflatex compilation command. In TeXstudio: Options -> Configure Texstudio... -> Commands -> PdfLaTeX: 'pdflatex --synctex=1 -interaction=nonstopmode -shell-escape %.tex'
 prefix=images/tikz/,				% Place externalized TikZ-generated images in a specific folder - ignored by git
@@ -58,6 +59,7 @@ prefix=images/tikz/,				% Place externalized TikZ-generated images in a specific
 	\printnames[given-family]{labelname}}
 {\multicitedelim}
 {\usebibmacro{postnote}}
+\usepackage{afterpage}										% To keep the footnote created in the caption of a figure and the figure itself on the same page
 
 %% Document settings
 \parindent=0pt 		   % Indentation of the 1st line of the paragraph
@@ -93,8 +95,15 @@ prefix=images/tikz/,				% Place externalized TikZ-generated images in a specific
 }
 
 %%% Custom commands
-\DeclareRobustCommand{\code}[1]{{\begingroup\sethlcolor{gray-light}\hl{\texttt{#1}}\endgroup}} % Shortcut for code font in text
-\soulregister{\code}{1}																		   % Codeify inline text character by character
+\newcommand{\code}[1]{\colorbox{gray-light}{\texttt{#1}}}									   % Inline code font/highlighting
+\newenvironment{tight_enumerate}{															   % Define new enumerate with smaller spaces between items
+	\begin{enumerate}
+		\setlength{\itemsep}{0pt}
+	}{\end{enumerate}}
+\newenvironment{tight_itemize}{															  	   % Define a new itemize environment with smaller spaces between items
+	\begin{itemize}
+		\setlength{\itemsep}{0pt}
+	}{\end{itemize}}
 
 %%% String variables
 \newcommand{\Author}{Lukáš Matthew Čejka}
