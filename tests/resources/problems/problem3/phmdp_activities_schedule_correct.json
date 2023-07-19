@@ -73,7 +73,7 @@
       "resource": 4
     }
   ],
-  "title": "Parallel Heuristic Method with Dynamic Priorities (PHMDP) - Gantt diagram",
+  "title": "Parallel Heuristic Method with Dynamic Priorities (PHMDP) - Gantt chart",
   "xlabel": "Time",
   "ylabel": "Activity"
 }

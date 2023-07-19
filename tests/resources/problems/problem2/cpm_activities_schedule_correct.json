@@ -43,7 +43,7 @@
       "resource": 4
     }
   ],
-  "title": "CPM - Gantt diagram",
+  "title": "CPM - Gantt chart",
   "xlabel": "Time",
   "ylabel": "Activity"
 }
