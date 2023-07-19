@@ -1,6 +1,6 @@
-# Heuristics Methods for Activity Dependency Problems (HMADP)
+# Heuristic Methods for Activity Dependency Problems (HMADP)
 Project comparing heuristic methods on activity-dependency problems. Implementation
-done using Python for the _Heuristic Algorithms_ course at FNSPE CTU.
+was done using Python for the _Heuristic Algorithms_ course at FNSPE CTU.
 
 ## Dependencies
 
