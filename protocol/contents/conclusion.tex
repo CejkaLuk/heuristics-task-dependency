@@ -1,1 +1,15 @@
+\clearpage
 \section{Conclusion}
+In summary, this protocol presents the theory behind a selection of heuristic methods that can be used to determine the earliest possible completion of a set of jobs while adhering to certain limitations. The limitations include dependencies between the jobs and the resources they require.
+The heuristic methods were implemented in a project using Python and subsequently compared on a small exploratory sample of real-life problems observed on a data-processing engine.
+
+Taking into consideration the small sample size, the results presented cannot be used to definitively claim one heuristic outperforms another.
+However, it can be stated that in terms of the entire benchmark comprising thousands of problems, PHM and PHMDP outperformed SHM in the majority of cases.
+Unfortunately, the specific data cannot be presented due to trade secrets.
+It is noteworthy that, theoretically, while SHM produces suboptimal timelines compared to PHM and PHMDP, it may be the preferred heuristic to use as its implementation is faster than the remaining heuristics.
+For example, if multiple jobs were to be submitted every second, the timeline may have to be recomputed frequently.
+Therefore, it is possible that the time spent computing the timeline may be greater than the time gained by using PHM or PHMDP over SHM.
+Furthermore, theoretically, the performance of the implementations of PHM and PHMDP could further decrease with the presence of thousands of jobs.
+
+In terms of future work, the heuristics ought to be compared on a different set of problems.
+Furthermore, their implementations ought to be optimized and perhaps implemented using a more performance-oriented language, such as C++.
