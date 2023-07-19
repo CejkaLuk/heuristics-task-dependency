@@ -14,9 +14,11 @@ The core dependencies for the HMADP project are:
 
 The dependencies for HMADP are the following Python packages:
 
+* [matplotlib](https://matplotlib.org/stable/) - for visualizing problem timelines
 * [nose2](https://docs.nose2.io/en/latest/>) - for unit tests
 * [nose2-cov](https://pypi.org/project/nose2-cov/>) - for test coverage (with
   reports etc.)
+* [numpy](https://numpy.org/) - for various operations during visualization
 * [sphinx](https://www.sphinx-doc.org/en/master/>) - for generating the
   documentation
 
@@ -61,7 +63,7 @@ to `docs/` and run the following predefined task:
 $ make html
 ```
 
-To remove the generated documentation run in `docs/`:
+To remove the documentation generate in `docs/build/` execute the following in `docs/`:
 ```
 $ make clean
 ```
