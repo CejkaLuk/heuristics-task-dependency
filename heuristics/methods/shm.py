@@ -3,7 +3,13 @@ from heuristics.methods.method import HeuristicMethod
 
 
 class SerialHeuristicMethod(HeuristicMethod):
-    """Serial Heuristic Method (SHM) for activity-based project planning."""
+    """
+    Serial Heuristic Method (SHM) for activity-based project planning.
+
+    The method first arranges the activities into an ascending sequence by the ID.
+    Then, starting with the first activity, it schedules every activity as soon as
+    possible.
+    """
 
     __method_name: str = "Serial Heuristic Method (SHM)"
 
