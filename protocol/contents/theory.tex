@@ -8,7 +8,7 @@ To complete the project, all activities must be finished while adhering to their
 The challenging aspect of the problem is to complete the project in the shortest time possible while keeping to the dependencies, and not exceeding the resources available. The activities and their relationships within a project can be represented using an event-oriented directed graph, called the \textit{CPM network}.
 
 In a CPM network, the nodes represent milestones that mark the start or completion of activities, while the directed, weighted edges represent the activities and their duration.
-For this project, it is assumed that there is only one start node initiating the project and one end node that represents the completion of the project.
+For this project, it is assumed that there is only one start node initiating the project and one or more end nodes that represent the completion of the project.
 An example of such a graph is presented in Figure~\ref{Figure:theory->problem->cpm-network-example}.
 
 \begin{figure}[ht!]
@@ -48,7 +48,7 @@ An example of such a graph is presented in Figure~\ref{Figure:theory->problem->c
 		Each node represents a milestone that either marks the start or the completion of activities.
 		The number inside each node is the ID of the milestone represented by the node.
 		Each weighted edge represents an activity and its duration.
-		The ID of an activity is dependent on the node it starts from and the node it ends in, i.e. $i$-$j$, where $i$ is the ID of the start node and $j$ is the ID of the end node.
+		The ID of an activity is determined from the node it starts from and the node it ends in, i.e. $i$-$j$, where $i$ is the ID of the start node and $j$ is the ID of the end node.
 		For example, the ID of the activity starting in node 1 and ending in node 2 is 1-2 and its duration is 4.
 	}
 	\label{Figure:theory->problem->cpm-network-example}
@@ -103,7 +103,7 @@ The activity timeline produced by CPM can be visualized using a Gantt chart\foot
 \afterpage{
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=\linewidth]{images/cpm_example_project.png}
+	\includegraphics[width=\linewidth]{images/theory/cpm_example_project.png}
 	\caption{Timeline of the activities presented in Table~\ref{Table:theory->cpm->exmaple->data} as scheduled by CPM.
 		The vertical axis represents the activity, while the horizontal axis displays the time units.
 		The numbers in the squares represent the units of resources required by each activity at a point in time.
@@ -147,7 +147,7 @@ To demonstrate the process, the activity timeline for the example project schedu
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=\linewidth]{images/shm_example_project.png}
+	\includegraphics[width=\linewidth]{images/theory/shm_example_project.png}
 	\caption{Timeline of the activities presented in Table~\ref{Table:theory->cpm->exmaple->data} as scheduled by SHM.
 		The vertical axis represents the activity, while the horizontal axis displays the time units.
 		The numbers in the squares represent the units of resources required by each activity at a point in time.
@@ -180,6 +180,7 @@ Using the output of CPM and the provided $r_\mathrm{max}$, PHM performs the foll
 	\begin{tight_enumerate}
 		\item Create a set of activities whose predecessors are all completed.
 		\item Arrange the activities in the set in ascending order according to their TR value.
+			If two activities have the same TR value, then they are ordered using their ID as done in SHM: $\left(i_1, j_1\right),  \ldots, \left(i_m, j_m\right)$ so that $i_k < i_{k+1}, j_k < j_{k+1}$.
 		\item Starting with the activity with the lowest TR value, schedule as many activities from the time unit as possible while adhering to the resources available in every time unit.
 	\end{tight_enumerate}
 \end{tight_enumerate}
@@ -188,7 +189,7 @@ The activity timeline for the example project scheduled using PHM with $r_\mathr
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=\linewidth]{images/phm_example_project.png}
+	\includegraphics[width=\linewidth]{images/theory/phm_example_project.png}
 	\caption{Timeline of the activities presented in Table~\ref{Table:theory->cpm->exmaple->data} as scheduled by PHM.
 		The vertical axis represents the activity, while the horizontal axis displays the time units.
 		The numbers in the squares represent the units of resources required by each activity at a point in time.
@@ -220,6 +221,7 @@ Using the output of CPM and the provided $r_\mathrm{max}$, PHMDP performs the fo
 		\item Create a set of activities whose predecessors are all completed.
 		\item Update the priorities for the activities to $\mathrm{LS}_{i, j} - t$.
 		\item Arrange the activities in the set in ascending order according to their priority value.
+			If two activities have the same priority value, then they are ordered using their ID as done in SHM: $\left(i_1, j_1\right),  \ldots, \left(i_m, j_m\right)$ so that $i_k < i_{k+1}, j_k < j_{k+1}$.
 		\item Starting with the activity with the lowest priority value, schedule as many activities from the time unit as possible while adhering to the resources available in every time unit.
 	\end{tight_enumerate}
 \end{tight_enumerate}
@@ -228,7 +230,7 @@ The activity timeline for the example project scheduled using PHMDP with $r_\mat
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=\linewidth]{images/phmdp_example_project.png}
+	\includegraphics[width=\linewidth]{images/theory/phmdp_example_project.png}
 	\caption{Timeline of the activities presented in Table~\ref{Table:theory->cpm->exmaple->data} as scheduled by PHMDP.
 		The vertical axis represents the activity, while the horizontal axis displays the time units.
 		The numbers in the squares represent the units of resources required by each activity at a point in time.
